@@ -1,0 +1,12 @@
+Program
+  List
+    FunctionDecl ID="main"
+      List
+      Block
+        List
+          FunctionCallStmt
+            FunctionCall ID="print"
+              List
+                VariableUse ID="a"
+          DeclAssignmentStmt ID="a"
+            Numeral NUMERAL="10"

@@ -1,0 +1,10 @@
+Program
+  List
+    FunctionDecl ID="main"
+      List
+      Block
+        List
+          VariableUse
+            VariableDecl ID="x"
+          VariableUse
+            VariableDecl ID="y"

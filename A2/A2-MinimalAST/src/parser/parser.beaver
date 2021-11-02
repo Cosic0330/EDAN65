@@ -1,0 +1,166 @@
+%class "LangParser";
+%package "lang.ast";
+
+%embed {:
+	static public class SyntaxError extends RuntimeException { public SyntaxError(String msg) {super(msg);}}
+	// Disable syntax error recovery
+	protected void recoverFromError(Symbol token, TokenStream in) {
+		throw new SyntaxError("Cannot recover from the syntax error");
+	}
+:};
+
+%terminals WHILE, IF, ELSE, RETURN, INT, ASSIGN, ID, NUMERAL, LPAR, RPAR, LCB, RCB, SEMI, COMMA, ADD, SUB, MUL, DIV, MOD, EQ, NEQ, LES, GRE, LEQ, GEQ;
+
+%typeof program = "Program";
+%typeof function_decl = "FunctionDecl";
+%typeof function_list = "List";
+%typeof parameter_list = "List";
+%typeof statement_list = "List";
+%typeof expr_list = "List";
+%typeof opt_expr = "List";
+%typeof opt_param = "List";
+%typeof param = "Param";
+%typeof block = "Block";
+%typeof statement = "Stmt";
+%typeof varible_decl = "VariableDecl";
+%typeof assignment_stmt = "Assignment";
+%typeof decl_assignment_stmt = "DeclAssignmentStmt";
+%typeof function_call_stmt = "FunctionCallStmt";
+%typeof while_stmt = "WhileStmt";
+%typeof if_stmt = "IfStmt";
+%typeof if_else_stmt = "IfStmt";
+%typeof	return_stmt = "ReturnStmt";
+%typeof variable_use = "VariableUse";
+%typeof function_call = "FunctionCall";
+%typeof numeral = "Numeral";
+%typeof expr = "Expr";
+%typeof term = "Expr";
+%typeof factor = "Expr";
+%typeof comp = "Expr";
+%typeof value = "Expr";
+
+%goal program;
+
+program = 
+	function_list.a {: return new Program(a); :}
+	| /* epsillon */ {: return new Program(); :}
+	;
+
+function_list = 
+	function_decl.a {: return new List().add(a); :}
+	| function_list.list function_decl.a {: return list.add(a); :}
+	;
+
+function_decl = INT ID.id LPAR opt_param.parameters RPAR block.statements {: return new FunctionDecl(id, parameters, statements); :} ;
+
+block = LCB opt_expr.a RCB {: return new Block(a); :} ;
+
+opt_expr = 
+	expr_list.e {: return e; :}
+	| statement_list.b {: return b; :}
+	| /* epsillon */ {: return new List(); :}
+	;
+
+expr_list =
+	expr.a {: return new List().add(a); :}
+	| expr_list.list COMMA expr.a {: return list.add(a); :}
+	;
+
+opt_param = 
+	parameter_list.a {: return a; :}
+	| /* epsillon */ {: return new List(); :}
+	;
+
+parameter_list = 
+	param.a {: return new List().add(a); :}
+	| parameter_list.list COMMA param.a {: return list.add(a); :}
+	;
+
+param = INT ID.id {: return new Param(id); :} ;
+
+statement_list = 
+	statement.a {: return new List().add(a); :}
+	| statement_list.list statement.a {: return list.add(a); :}
+	;
+
+statement = 
+	variable_decl
+	| assignment_stmt
+	| decl_assignment_stmt
+	| function_call_stmt
+	| while_stmt
+	| if_stmt
+	| if_else_stmt
+	| return_stmt
+	;
+	
+assignment_stmt = variable_use.id ASSIGN expr.b SEMI {: return new AssignmentStmt(id, b); :} ; 
+
+decl_assignment_stmt = INT variable_use.a ASSIGN expr.b SEMI {: return new DeclAssignmentStmt(a,b); :} ; 
+
+function_call_stmt = expr.a SEMI {: return new FunctionCallStmt(a); :} ;
+
+function_call = ID.id LPAR opt_expr.args RPAR {: return new FunctionCall(id,args); :} ;
+
+while_stmt = WHILE LPAR expr.a RPAR block.b {: return new WhileStmt(a, b); :} ;
+
+if_stmt = IF LPAR expr.a RPAR block.b {: return new IfStmt(a, b, new Opt()); :} ;
+
+if_else_stmt = IF LPAR expr.a RPAR block.b ELSE block.c {: return new IfStmt(a, b, new Opt(c)); :} ;
+
+return_stmt = RETURN expr.e SEMI {: return new ReturnStmt(e); :} ;
+
+expr =
+	equal
+	| notEqual
+	| lessThan
+	| greaterThan
+	| lessOrEqual
+	| greaterOrEqual
+	| comp
+	;
+
+comp = 
+	add
+	| sub
+	| term
+	;
+
+value =
+	variable_use.v {: return v; :}
+	| numeral.n {: return n; :}
+	| LPAR expr.e RPAR {: return e; :}
+	| function_call
+	;
+
+factor = 
+    SUB factor.b {: return new Unary(b); :} 
+	| value
+	;
+
+term =
+	mul
+	| div
+	| mod
+	| factor
+	;
+
+add = comp.left ADD term.right {: return new Add(left, right); :};
+sub = comp.left SUB term.right {: return new Sub(left, right); :};
+
+mul = term.left MUL factor.right {: return new Mul(left, right); :};
+div = term.left DIV factor.right {: return new Div(left, right); :};
+mod = term.left MOD factor.right {: return new Mod(left, right); :};
+
+equal = comp.left EQ comp.right {: return new Equal(left, right); :};
+notEqual = comp.left NEQ comp.right {: return new NotEqual(left, right); :};
+lessThan = comp.left LES comp.right {: return new LessThan(left, right); :};
+greaterThan = comp.left GRE comp.right {: return new GreaterThan(left, right); :};
+lessOrEqual = comp.left LEQ comp.right {: return new LessOrEqual(left, right); :};
+greaterOrEqual = comp.left GEQ comp.right {: return new GreaterOrEqual(left, right); :};
+
+variable_use = ID.id {: return new VariableUse(new VariableDecl(id)); :} ;
+
+variable_decl = INT ID.id SEMI {: return new VariableDecl(id); :} ;
+
+numeral = NUMERAL.num {: return new Numeral(num); :} ;

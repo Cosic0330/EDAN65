@@ -1,0 +1,45 @@
+import java.util.*;
+
+aspect FunctionCalls {
+    
+    inh FunctionDecl IdDecl.enheritedFunction();
+    eq FunctionDecl.getIdDecl().enheritedFunction() = this;
+
+    inh FunctionDecl FunctionCall.enclosingFunction();
+    eq FunctionDecl.getChild().enclosingFunction() = this;
+
+    coll Set<FunctionDecl> Program.functionCalls() [new LinkedHashSet<FunctionDecl>()] with add root Program;
+
+    //All functionCalls - print, f, fac
+    FunctionCall contributes getIdUse().decl().enheritedFunction()
+        //when !functionCalls.containsKey(getIdUse().decl().getIdDecl().getID())
+        to Program.functionCalls();
+
+    //Called from - main
+    FunctionCall contributes enclosingFunction()
+        to Program.functionCalls();
+
+    public String FunctionDecl.toString() {
+        return getIdDecl().getID();
+    }
+
+    coll Set<FunctionDecl> FunctionDecl.reach() [new LinkedHashSet<FunctionDecl>()] root FunctionDecl;
+
+    FunctionCall contributes getIdUse().decl().enheritedFunction()
+         to FunctionDecl.reach();
+
+   // FunctionCall contributes getIdUse().decl().enheritedFunction()
+     //   to FunctionDecl.reachable()
+       // for enclosingFunction();
+
+    syn Set<FunctionDecl> FunctionDecl.reachable() circular [new LinkedHashSet<FunctionDecl>()] {
+        Set<FunctionDecl> result = new LinkedHashSet<FunctionDecl>();
+        for (FunctionDecl s: reach()){
+            result.add(s);
+            result.addAll(s.reachable());
+           
+        }
+        return result;
+    }
+
+}

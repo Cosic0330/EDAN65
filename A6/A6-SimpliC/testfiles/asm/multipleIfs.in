@@ -1,0 +1,27 @@
+int main() {
+  int a = 1;
+  if(1<2){
+      print(1);
+  }
+  if(2<3){
+      print(3);
+  }
+  f(a);
+  p(a);
+  return 0;
+}
+
+int f(int a){
+    if(a<3){
+        print(2);
+    }
+    return 0;
+}
+
+int p(int b){
+    if(b<3){
+        print(6);
+    }
+    return 0;
+}
+

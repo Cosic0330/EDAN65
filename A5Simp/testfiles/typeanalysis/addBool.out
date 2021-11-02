@@ -1,0 +1,2 @@
+Error at line 3: Found type: <bool>, ExpectedType: <int>
+Error at line 5: Found type: <unknown>, ExpectedType: <int>

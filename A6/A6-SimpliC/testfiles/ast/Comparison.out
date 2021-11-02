@@ -1,0 +1,49 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="x"
+      List
+      Block
+        List
+          AssignmentStmt
+            IdUse ID="a"
+            Equal
+              Numeral NUMERAL="2"
+              Mul
+                Numeral NUMERAL="2"
+                Numeral NUMERAL="4"
+          AssignmentStmt
+            IdUse ID="b"
+            NotEqual
+              Numeral NUMERAL="3"
+              Add
+                Numeral NUMERAL="5"
+                Numeral NUMERAL="1"
+          AssignmentStmt
+            IdUse ID="c"
+            LessThan
+              Div
+                Numeral NUMERAL="4"
+                Numeral NUMERAL="1"
+              Numeral NUMERAL="2"
+          AssignmentStmt
+            IdUse ID="d"
+            GreaterThan
+              Numeral NUMERAL="3"
+              Mod
+                IdUse ID="x"
+                Numeral NUMERAL="6"
+          AssignmentStmt
+            IdUse ID="e"
+            LessOrEqual
+              Sub
+                Numeral NUMERAL="4"
+                Numeral NUMERAL="2"
+              Numeral NUMERAL="4"
+          AssignmentStmt
+            IdUse ID="f"
+            GreaterOrEqual
+              Add
+                Numeral NUMERAL="6"
+                Numeral NUMERAL="5"
+              Numeral NUMERAL="2"

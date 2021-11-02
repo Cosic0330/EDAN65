@@ -1,0 +1,100 @@
+New put: Variable: return Value: 0
+{return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, return=0}
+New put: Variable: return Value: 0
+{return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, return=0}
+New put: Variable: n Value: 5
+{n=5}
+New put: Variable: return Value: 0
+{n=5, return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, n=5, return=0}
+New get: Variable: n Value: 5
+New get: Variable: n Value: 5
+New put: Variable: n Value: 4
+{n=4}
+New put: Variable: return Value: 0
+{n=4, return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, n=4, return=0}
+New get: Variable: n Value: 4
+New get: Variable: n Value: 4
+New put: Variable: n Value: 3
+{n=3}
+New put: Variable: return Value: 0
+{n=3, return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, n=3, return=0}
+New get: Variable: n Value: 3
+New get: Variable: n Value: 3
+New put: Variable: n Value: 2
+{n=2}
+New put: Variable: return Value: 0
+{n=2, return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, n=2, return=0}
+New get: Variable: n Value: 2
+New get: Variable: n Value: 2
+New put: Variable: n Value: 1
+{n=1}
+New put: Variable: return Value: 0
+{n=1, return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, n=1, return=0}
+New get: Variable: n Value: 1
+Return value: 1
+New put: Variable: return Value: 1
+{returnValue=0, n=1, return=1}
+New put: Variable: returnValue Value: 1
+{returnValue=1, n=1, return=1}
+New get: Variable: return Value: 1
+New put: Variable: return Value: 0
+{returnValue=1, n=1, return=0}
+New get: Variable: returnValue Value: 1
+New get: Variable: n Value: 2
+Return value: 2
+New put: Variable: return Value: 1
+{returnValue=0, n=2, return=1}
+New put: Variable: returnValue Value: 2
+{returnValue=2, n=2, return=1}
+New get: Variable: return Value: 1
+New put: Variable: return Value: 0
+{returnValue=2, n=2, return=0}
+New get: Variable: returnValue Value: 2
+New get: Variable: n Value: 3
+Return value: 6
+New put: Variable: return Value: 1
+{returnValue=0, n=3, return=1}
+New put: Variable: returnValue Value: 6
+{returnValue=6, n=3, return=1}
+New get: Variable: return Value: 1
+New put: Variable: return Value: 0
+{returnValue=6, n=3, return=0}
+New get: Variable: returnValue Value: 6
+New get: Variable: n Value: 4
+Return value: 24
+New put: Variable: return Value: 1
+{returnValue=0, n=4, return=1}
+New put: Variable: returnValue Value: 24
+{returnValue=24, n=4, return=1}
+New get: Variable: return Value: 1
+New put: Variable: return Value: 0
+{returnValue=24, n=4, return=0}
+New get: Variable: returnValue Value: 24
+New get: Variable: n Value: 5
+Return value: 120
+New put: Variable: return Value: 1
+{returnValue=0, n=5, return=1}
+New put: Variable: returnValue Value: 120
+{returnValue=120, n=5, return=1}
+New get: Variable: return Value: 1
+New put: Variable: return Value: 0
+{returnValue=120, n=5, return=0}
+New get: Variable: returnValue Value: 120
+120
+returning
+New get: Variable: return Value: 0
+New get: Variable: return Value: 0

@@ -1,0 +1,9 @@
+int main() {
+  int x = 121;
+  int y = 12321;
+  int z = 32123;
+  print(y);
+  print(z);
+  print(x);
+  return 0;
+}

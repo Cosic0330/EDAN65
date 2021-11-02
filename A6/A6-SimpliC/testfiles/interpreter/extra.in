@@ -1,0 +1,15 @@
+int main() {
+    int x = 2; 
+    a();
+    b();
+} 
+
+int a() {
+    int x = 1;
+    int y = 20;
+}
+
+int b() {
+    int x = 1;
+    int y = 20;
+}

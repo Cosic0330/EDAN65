@@ -1,0 +1,12 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="f"
+      List
+        Param
+          IdDecl ID="x"
+      Block
+        List
+          ReturnStmt
+            Unary
+              IdUse ID="x"

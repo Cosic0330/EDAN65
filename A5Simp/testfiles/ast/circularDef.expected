@@ -1,0 +1,16 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="i"
+      List
+      Block
+        List
+          DeclAssignmentStmt
+            IdDecl ID="a"
+            Add
+              IdUse ID="a"
+              Numeral NUMERAL="5"
+          FunctionCallStmt
+            FunctionCall
+              IdUse ID="i"
+              List

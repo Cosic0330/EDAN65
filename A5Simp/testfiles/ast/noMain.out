@@ -1,0 +1,21 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="main"
+      List
+      Block
+        List
+          FunctionCallStmt
+            FunctionCall
+              IdUse ID="print"
+              List
+                Add
+                  Numeral NUMERAL="1"
+                  Mul
+                    Numeral NUMERAL="2"
+                    Numeral NUMERAL="3"
+          FunctionCallStmt
+            FunctionCall
+              IdUse ID="print"
+              List
+                Numeral NUMERAL="10"

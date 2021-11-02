@@ -1,0 +1,12 @@
+int main(){
+    int a=0;
+    int b;
+    int b;
+    if(a==b){
+        int b;
+        b=c;
+    }
+    while(a==0){
+        int a = 5;
+    }
+}

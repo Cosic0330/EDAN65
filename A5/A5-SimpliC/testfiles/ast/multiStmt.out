@@ -1,0 +1,51 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="fac"
+      List
+        Param
+          IdDecl ID="n"
+      Block
+        List
+          IfStmt
+            LessOrEqual
+              IdUse ID="n"
+              Numeral NUMERAL="1"
+            Block
+              List
+                ReturnStmt
+                  Numeral NUMERAL="1"
+            Opt
+              Block
+                List
+                  ReturnStmt
+                    Mul
+                      FunctionCall
+                        IdUse ID="fac"
+                        List
+                          Sub
+                            IdUse ID="n"
+                            Numeral NUMERAL="1"
+                      IdUse ID="n"
+    FunctionDecl
+      IdDecl ID="f"
+      List
+      Block
+        List
+          FunctionCallStmt
+            FunctionCall
+              IdUse ID="print"
+              List
+                FunctionCall
+                  IdUse ID="fac"
+                  List
+                    Numeral NUMERAL="5"
+    FunctionDecl
+      IdDecl ID="main"
+      List
+      Block
+        List
+          FunctionCallStmt
+            FunctionCall
+              IdUse ID="f"
+              List

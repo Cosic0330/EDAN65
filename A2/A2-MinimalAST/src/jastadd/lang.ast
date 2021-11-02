@@ -1,0 +1,52 @@
+/*
+Statments:
+- assignments
+- return statements
+- function calls
+- if statements
+- while statements
+
+Expressions:
+-identifier uses
+-function calls
+- +, -, *, /, % 
+- ==, !=, <=, <, >=,>
+*/
+
+Program ::= FunctionDecl*;
+
+abstract Decl;
+FunctionDecl : Decl ::= <ID:String> Param* Statements:Block;  //Lägg till param
+
+Param ::= <ID:String>;
+
+Block ::= Stmt*;
+
+abstract Stmt;
+VariableDecl : Stmt ::= <ID:String>; // Insert Decl as superclass
+AssignmentStmt : Stmt ::= VariableUse Expr;
+DeclAssignmentStmt : Stmt ::= VariableUse Expr;
+FunctionCallStmt : Stmt ::= Expr;
+WhileStmt : Stmt ::= Expr Block;
+IfStmt : Stmt ::= Expr Block [Else:Block];
+ReturnStmt : Stmt ::= Expr;
+
+abstract Expr;
+VariableUse : Expr ::= Variable:VariableDecl;
+FunctionCall : Expr ::= <ID:String> Args:Expr*;
+Numeral : Expr ::= <NUMERAL:String>;
+
+Unary : Expr ::= Expr;
+
+Add : Expr ::= Left:Expr Right:Expr;
+Sub : Expr ::= Left:Expr Right:Expr;
+Mul : Expr ::= Left:Expr Right:Expr;
+Div : Expr ::= Left:Expr Right:Expr;
+Mod : Expr ::= Left:Expr Right:Expr;
+
+Equal : Expr ::= Left:Expr Right:Expr;
+NotEqual : Expr ::= Left:Expr Right:Expr;
+LessThan : Expr ::= Left:Expr Right:Expr;
+GreaterThan : Expr ::= Left:Expr Right:Expr;
+LessOrEqual : Expr ::= Left:Expr Right:Expr;
+GreaterOrEqual : Expr ::= Left:Expr Right:Expr;

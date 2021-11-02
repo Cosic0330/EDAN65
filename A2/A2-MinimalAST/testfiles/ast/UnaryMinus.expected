@@ -1,0 +1,11 @@
+Program
+  List
+    FunctionDecl ID="f"
+      List
+        Param ID="x"
+      Block
+        List
+          ReturnStmt
+            Unary
+              VariableUse
+                VariableDecl ID="x"

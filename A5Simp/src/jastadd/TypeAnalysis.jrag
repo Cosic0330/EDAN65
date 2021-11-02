@@ -1,0 +1,148 @@
+
+aspect TypeAnalysis {
+
+    eq Program.getChild().type() = unknownType();
+
+    inh Type Expr.type();
+    
+    inh Type IdDecl.type();
+
+    syn Type Numeral.type() = intType();
+
+    syn Type Unary.type() = intType();
+
+    syn Type IdUse.type() = decl().type();
+    
+    eq FunctionDecl.getIdDecl().type() = intType();
+    eq VariableDecl.getIdDecl().type() = intType();
+    eq DeclAssignmentStmt.getIdDecl().type() = intType();
+    eq Param.getIdDecl().type() = intType();
+    
+    syn Type FunctionCall.type() {
+        for (Expr e : getArgs()) {
+            if (e.type() != intType()) return unknownType();
+        }
+        return intType();
+    }
+
+    syn Type Add.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return intType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type Sub.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return intType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type Mul.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return intType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type Div.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return intType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type Mod.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return intType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type Equal.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return boolType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type NotEqual.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return boolType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type LessThan.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return boolType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type GreaterThan.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return boolType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type LessOrEqual.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return boolType();
+        }
+        return unknownType();
+    }
+ 
+    syn Type GreaterOrEqual.type(){
+        if(getLeft().type()==intType() && getRight().type()==intType()){
+            return boolType();
+        }
+        return unknownType();
+    }
+
+    eq Program.getChild().expectedType() = unknownType();
+
+    inh Type Expr.expectedType();
+
+    //eq FunctionCall.getArg(int i).expectedType() = intType();
+
+    eq AssignmentStmt.getExpr().expectedType() = intType();
+    eq AssignmentStmt.getIdUse().expectedType() = intType();
+    eq DeclAssignmentStmt.getExpr().expectedType() = intType();
+    eq FunctionCallStmt.getExpr().expectedType() = intType();
+    eq WhileStmt.getExpr().expectedType() = boolType();
+    eq IfStmt.getExpr().expectedType() = boolType();
+    eq ReturnStmt.getExpr().expectedType() = intType();
+    
+    inh boolean IdDecl.isVariable();
+    inh boolean IdDecl.isFunction();
+    inh boolean IdUse.isVariable();
+    inh boolean IdUse.isFunction();
+    
+    eq Program.getChild().isVariable() = false;
+    eq Program.getChild().isFunction() = false;
+    eq FunctionDecl.getIdDecl().isVariable() = false;
+    eq FunctionDecl.getIdDecl().isFunction() = true;
+    eq AssignmentStmt.getIdUse().isVariable() = true;
+    eq AssignmentStmt.getIdUse().isFunction() = false;
+    eq DeclAssignmentStmt.getIdDecl().isVariable() = true;
+    eq DeclAssignmentStmt.getIdDecl().isFunction() = false;
+    eq VariableDecl.getIdDecl().isVariable() = true;
+    eq VariableDecl.getIdDecl().isFunction() = false;
+    eq FunctionCall.getIdUse().isVariable() = false;
+    eq FunctionCall.getIdUse().isFunction() = true;
+    
+    syn boolean FunctionCall.funcRefVarError() = getIdUse().decl().isVariable();
+    syn boolean DeclAssignmentStmt.varRefFuncError() = getIdDecl().isFunction();
+    syn boolean IdUse.varUseRefToFuncError() = isVariable() && decl().isFunction();
+    
+    inh FunctionDecl IdDecl.function();
+    
+    syn boolean FunctionCall.correctNumArgs() = getNumArg() == getIdUse().decl().function().getNumParam();
+    syn FunctionDecl IdUse.function() = decl().function();
+    
+    eq FunctionDecl.getIdDecl().function() = this;
+    eq Program.getChild().function() = unknownFunction();
+}

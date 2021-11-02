@@ -1,0 +1,32 @@
+aspect Type {
+
+    //Här skapas de tre nya NTA typerna
+    syn nta IntType Program.intType() = new IntType("<int>");  //VariableDecl, FunctionDecl, Stmt?
+    syn nta BoolType Program.boolType() = new BoolType("<bool>"); //Expr ==
+    syn nta UnknownType Program.unknownType() = new UnknownType("<unknown>");
+    
+    //Här ärver samtliga noder i grafen metoderna...
+    inh IntType ASTNode.intType();
+    inh BoolType ASTNode.boolType();
+    inh UnknownType ASTNode.unknownType();
+
+    //... som är definerade i Program
+    eq Program.getChild().intType() = intType();
+    eq Program.getChild().boolType() = boolType();
+    eq Program.getChild().unknownType() = unknownType();
+    
+    syn boolean Type.compatibleType(Type type);
+    syn boolean IntType.compatibleType(Type type) = this == type;
+    syn boolean BoolType.compatibleType(Type type) = this == type;
+    syn boolean UnknownType.compatibleType(Type type) = this == type;
+    
+    syn nta UnknownFunction Program.unknownFunction() = new UnknownFunction(new IdDecl("<unknown-function>"), new List(), new Block());
+    inh UnknownFunction ASTNode.unknownFunction();
+    syn boolean FunctionDecl.isUnknownFunction() = false;
+    
+    eq Program.getChild().unknownFunction() = unknownFunction();
+    eq UnknownFunction.isUnknownFunction() = true;
+
+}
+
+

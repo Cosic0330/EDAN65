@@ -1,0 +1,10 @@
+int main(){
+    print(f(2,3));
+    return 0;
+}
+
+int f(int a, int b) {
+    int c = 4;
+    int d = 5;
+    return (a + b);
+}

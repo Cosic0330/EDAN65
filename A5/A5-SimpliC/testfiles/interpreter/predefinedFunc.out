@@ -1,0 +1,10 @@
+New put: Variable: return Value: 0
+{return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, return=0}
+7
+returning
+New get: Variable: return Value: 0
+10
+returning
+New get: Variable: return Value: 0

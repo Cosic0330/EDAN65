@@ -1,0 +1,14 @@
+int g(int x) {
+    print(x); 
+    return 0;
+}
+
+int f(int x) {
+    g(x);
+    return 0;
+}
+
+int main() {
+  f(12321);
+  return 0;
+}

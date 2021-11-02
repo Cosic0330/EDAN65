@@ -1,0 +1,22 @@
+int main() {
+    int i = 100;
+    while(i>0){
+        if(i==5){
+            int b=i;
+        }
+        i=i-1;
+    }
+}
+
+
+int mains(){
+    if(i==0){
+        if(i==0){
+            if(i==0){
+
+            }
+        }
+        return 0;
+    }
+}
+    

@@ -1,0 +1,48 @@
+Program
+  List
+    FunctionDecl ID="x"
+      List
+      Block
+        List
+          AssignmentStmt
+            VariableUse ID="a"
+            Equal
+              Numeral NUMERAL="2"
+              Mul
+                Numeral NUMERAL="2"
+                Numeral NUMERAL="4"
+          AssignmentStmt
+            VariableUse ID="b"
+            NotEqual
+              Numeral NUMERAL="3"
+              Add
+                Numeral NUMERAL="5"
+                Numeral NUMERAL="1"
+          AssignmentStmt
+            VariableUse ID="c"
+            LessThan
+              Div
+                Numeral NUMERAL="4"
+                Numeral NUMERAL="1"
+              Numeral NUMERAL="2"
+          AssignmentStmt
+            VariableUse ID="d"
+            GreaterThan
+              Numeral NUMERAL="3"
+              Mod
+                VariableUse ID="x"
+                Numeral NUMERAL="6"
+          AssignmentStmt
+            VariableUse ID="e"
+            LessOrEqual
+              Sub
+                Numeral NUMERAL="4"
+                Numeral NUMERAL="2"
+              Numeral NUMERAL="4"
+          AssignmentStmt
+            VariableUse ID="f"
+            GreaterOrEqual
+              Add
+                Numeral NUMERAL="6"
+                Numeral NUMERAL="5"
+              Numeral NUMERAL="2"

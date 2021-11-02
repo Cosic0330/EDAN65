@@ -1,0 +1,27 @@
+New put: Variable: return Value: 0
+{return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, return=0}
+New put: Variable: 0_i Value: 0
+{returnValue=0, 0_i=0, return=0}
+New get: Variable: 0_i Value: 0
+New get: Variable: return Value: 0
+New get: Variable: 0_i Value: 0
+New put: Variable: 1_0_i Value: 1
+{1_0_i=1, returnValue=0, 0_i=0, return=0}
+New get: Variable: 1_0_i Value: 1
+New get: Variable: 1_0_i Value: 1
+New put: Variable: 1_1_0_i Value: 2
+{1_0_i=1, 1_1_0_i=2, returnValue=0, 0_i=0, return=0}
+New get: Variable: 1_1_0_i Value: 2
+New get: Variable: 1_1_0_i Value: 2
+2
+returning
+New get: Variable: 1_0_i Value: 1
+1
+returning
+New get: Variable: return Value: 0
+New get: Variable: 0_i Value: 0
+0
+returning
+New get: Variable: return Value: 0

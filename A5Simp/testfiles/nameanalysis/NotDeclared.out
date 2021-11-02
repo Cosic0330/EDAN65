@@ -1,0 +1,3 @@
+Error at line 4: symbol 'b' is not declared
+Error at line 6: Found Type: <unknown>, ExpectedType: <bool>
+Error at line 6: symbol 'q' is not declared

@@ -1,0 +1,22 @@
+Program
+  List
+    FunctionDecl ID="f"
+      List
+      Block
+        List
+          ReturnStmt
+            Add
+              Numeral NUMERAL="3"
+              Unary
+                Numeral NUMERAL="2"
+    FunctionDecl ID="f"
+      List
+        Param ID="x"
+      Block
+        List
+          ReturnStmt
+            Mul
+              Unary
+                VariableUse ID="x"
+              Unary
+                Numeral NUMERAL="2"

@@ -1,0 +1,10 @@
+aspect predefinedFunctions{
+    syn nta List<FunctionDecl> Program.predefinedFunctions() {
+        List<FunctionDecl> list = new List<FunctionDecl>();
+        list.add(new FunctionDecl(new IdDecl("read"), new List(), new Block(new List())));
+        list.add(new FunctionDecl(new IdDecl("print"),new List(new IdDecl("output")), new Block(new List())));
+        // Create objects of type FunctionDecl and add them to the list
+        return list;
+        }
+
+}

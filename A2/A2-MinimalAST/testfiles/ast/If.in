@@ -1,0 +1,11 @@
+int x(){
+    if (b==1){
+        int i;
+        g(1,x);
+    }
+    if (a==2){
+        return 5;
+    } else {
+        return 5+6;
+    }
+}

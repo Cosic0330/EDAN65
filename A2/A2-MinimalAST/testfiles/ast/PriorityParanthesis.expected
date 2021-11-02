@@ -1,0 +1,61 @@
+Program
+  List
+    FunctionDecl ID="x"
+      List
+      Block
+        List
+          AssignmentStmt
+            VariableUse
+              VariableDecl ID="a"
+            Mul
+              Add
+                Numeral NUMERAL="1"
+                Numeral NUMERAL="2"
+              Numeral NUMERAL="3"
+          AssignmentStmt
+            VariableUse
+              VariableDecl ID="b"
+            Div
+              Sub
+                VariableUse
+                  VariableDecl ID="e"
+                Numeral NUMERAL="5"
+              Numeral NUMERAL="6"
+          AssignmentStmt
+            VariableUse
+              VariableDecl ID="c"
+            Mul
+              Numeral NUMERAL="7"
+              Sub
+                Numeral NUMERAL="8"
+                VariableUse
+                  VariableDecl ID="b"
+          AssignmentStmt
+            VariableUse
+              VariableDecl ID="d"
+            Div
+              Numeral NUMERAL="1"
+              Add
+                Numeral NUMERAL="2"
+                Numeral NUMERAL="3"
+          AssignmentStmt
+            VariableUse
+              VariableDecl ID="e"
+            Mul
+              Mod
+                Sub
+                  VariableUse
+                    VariableDecl ID="x"
+                  Numeral NUMERAL="5"
+                Numeral NUMERAL="6"
+              Numeral NUMERAL="7"
+          AssignmentStmt
+            VariableUse
+              VariableDecl ID="f"
+            Sub
+              Numeral NUMERAL="8"
+              Mod
+                Sub
+                  Numeral NUMERAL="9"
+                  Numeral NUMERAL="1"
+                Numeral NUMERAL="4"

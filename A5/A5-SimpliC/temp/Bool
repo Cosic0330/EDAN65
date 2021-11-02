@@ -1,0 +1,24 @@
+syn boolean Equal.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) == getRight().eval(actrec);
+    }
+
+    syn boolean NotEqual.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) != getRight().eval(actrec);
+    }
+
+    syn boolean LessThan.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) < getRight().eval(actrec);
+    }
+
+    syn boolean GreaterThan.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) > getRight().eval(actrec);
+    }
+
+    syn boolean LessOrEqual.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) <= getRight().eval(actrec);
+    }
+
+    syn boolean GreaterOrEqual.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) >= getRight().eval(actrec);
+    }
+    

@@ -1,0 +1,30 @@
+New put: Variable: return Value: 0
+{return=0}
+New put: Variable: returnValue Value: 0
+{returnValue=0, return=0}
+New put: Variable: a Value: 10
+{a=10, returnValue=0, return=0}
+New get: Variable: a Value: 10
+New get: Variable: return Value: 0
+New get: Variable: a Value: 10
+New put: Variable: a Value: 20
+{a=20, returnValue=0, return=0}
+New get: Variable: return Value: 0
+New put: Variable: a Value: 15
+{a=15, returnValue=0, return=0}
+New get: Variable: return Value: 0
+New get: Variable: a Value: 15
+New get: Variable: a Value: 15
+New put: Variable: a Value: 30
+{a=30, returnValue=0, return=0}
+New get: Variable: return Value: 0
+New put: Variable: b Value: 0
+{a=30, b=0, returnValue=0, return=0}
+New get: Variable: b Value: 0
+New get: Variable: return Value: 0
+New get: Variable: b Value: 0
+New get: Variable: b Value: 0
+New put: Variable: b Value: 1
+{a=30, b=1, returnValue=0, return=0}
+New get: Variable: b Value: 1
+New get: Variable: return Value: 0

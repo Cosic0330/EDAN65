@@ -1,0 +1,29 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="x"
+      List
+      Block
+        List
+          ReturnStmt
+            IdUse ID="a"
+    FunctionDecl
+      IdDecl ID="y"
+      List
+      Block
+        List
+          ReturnStmt
+            Equal
+              IdUse ID="b"
+              Numeral NUMERAL="2"
+    FunctionDecl
+      IdDecl ID="z"
+      List
+      Block
+        List
+          ReturnStmt
+            FunctionCall
+              IdUse ID="gcd1"
+              List
+                IdUse ID="c"
+                IdUse ID="d"

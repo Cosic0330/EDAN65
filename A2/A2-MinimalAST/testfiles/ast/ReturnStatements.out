@@ -1,0 +1,29 @@
+Program
+  List
+    FunctionDecl ID="x"
+      List
+      Block
+        List
+          ReturnStmt
+            VariableUse
+              VariableDecl ID="a"
+    FunctionDecl ID="y"
+      List
+      Block
+        List
+          ReturnStmt
+            Equal
+              VariableUse
+                VariableDecl ID="b"
+              Numeral NUMERAL="2"
+    FunctionDecl ID="z"
+      List
+      Block
+        List
+          ReturnStmt
+            FunctionCall ID="gcd1"
+              List
+                VariableUse
+                  VariableDecl ID="c"
+                VariableUse
+                  VariableDecl ID="d"

@@ -1,0 +1,42 @@
+int main() {
+    f(2, 3);
+    return 0;
+}
+
+int f(int a, int b) {
+    int c = 4;
+    int d = 5;
+    print(a);
+    print(b);
+    print(c + d);
+    return 0;
+}
+
+/*
+call g
+5 - param 1
+dealloc param 2
+dealloc param 1
+return 
+
+d- localvar
+c- localvar
+call f     -> basepointer 0
+2- param 1
+3- param 2
+basepointer 0
+
+Local variables
+                <--------- stack, base
+Old basepointer
+Param 1
+Param 2
+                <--------- starck
+Retrun Adress
+                <--------- base
+Local variables
+Old base pointer
+Return Adress
+Parameters
+*/
+

@@ -1,0 +1,3 @@
+Error at line 4: symbol 'b' is already declared!
+Error at line 7: Found type: <unknown>, ExpectedType: <int>
+Error at line 7: symbol 'c' is not declared

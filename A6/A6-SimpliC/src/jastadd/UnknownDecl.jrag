@@ -1,0 +1,9 @@
+aspect UnknownDecl {
+	syn nta UnknownDecl Program.unknownDecl() = new UnknownDecl("<unknown>");
+	
+	inh UnknownDecl ASTNode.unknownDecl(); //Alla noder ärver unknownDecl...
+	eq Program.getChild().unknownDecl() = unknownDecl();	//... som finns i Program
+	
+	syn boolean IdDecl.isUnknown() = false; //Default sätts till false
+	eq UnknownDecl.isUnknown() = true;	//Men om UnknownDecl som är sub till IdDecl = true;
+}

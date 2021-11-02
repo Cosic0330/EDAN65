@@ -1,0 +1,281 @@
+import java.util.*;
+import java.io.PrintStream;
+
+
+
+aspect Interpreter {
+
+    public class ActivationRecord {
+        private HashMap<String, Integer> records;
+        private Scanner scan =new Scanner(System.in);
+
+        
+       // private ActivationRecord next;
+        
+        public ActivationRecord(){
+            records  = new HashMap();
+        }
+
+        public void put(String variable, Integer value){
+            records.put(variable, value);
+            //System.out.println("New put: Variable: " + variable + " Value: " + value);
+           // System.out.println(records.toString());
+        }
+
+        public Integer get(String variable){
+            Integer value = records.get(variable);
+           // System.out.println("New get: Variable: " + variable + " Value: " + value);
+            return value;
+        }
+
+        public Scanner getScanner(){
+            return scan;
+        }
+
+        public boolean containsKey(String variable){
+            return records.containsKey(variable);
+        }
+    }
+
+    public void Program.eval() {
+        boolean hasMain=false;
+        for (FunctionDecl func : getFunctionDeclList()){
+            if(func.getIdDecl().getID().equals("main")){
+                hasMain=true;
+                func.eval(new ActivationRecord());
+            }
+		}
+        if(!hasMain){
+         throw new RuntimeException();   
+        }
+        
+    }
+
+    public int FunctionDecl.eval(ActivationRecord actrec) {
+        actrec.put("return", 0);
+        actrec.put("returnValue", 0);
+        for (Stmt stmt : getBlock().getStmtList()){
+            stmt.eval(actrec);
+            if (actrec.get("return") == 1) {
+                actrec.put("return", 0);
+                return actrec.get("returnValue");
+            }
+        }
+        //throw new RuntimeException();
+        return 0;
+    }
+
+    public void Stmt.eval(ActivationRecord actrec) {
+        //throw new RuntimeException();
+        //System.out.println("In stmt now");
+    }
+
+    public int Expr.eval(ActivationRecord actrec) {
+        //throw new RuntimeException();
+        return 0;
+    }
+
+    public void DeclAssignmentStmt.eval(ActivationRecord actrec){
+        int value = getExpr().eval(actrec);
+        actrec.put(getIdDecl().uniqueName(), value);
+    }
+
+    public void VariableDecl.eval(ActivationRecord actrec){
+        actrec.put(getIdDecl().uniqueName(), 0);
+    }
+
+    public int IdUse.eval(ActivationRecord actrec){
+        String name = decl().uniqueName();
+        if(actrec.containsKey(name)){
+           return actrec.get(name); 
+        }else{
+            throw new NoSuchElementException();
+        }   
+    }
+
+    public void AssignmentStmt.eval(ActivationRecord actrec){
+        String name = getIdUse().decl().uniqueName();
+        if(actrec.containsKey(name)) {
+            actrec.put(name, getExpr().eval(actrec));  
+        } else {
+            throw new NoSuchElementException();
+        }
+    }
+
+    public void WhileStmt.eval(ActivationRecord actrec){
+        int conditionStatus=getExpr().eval(actrec);
+        while(conditionStatus==1){
+            for (Stmt stmt : getBlock().getStmtList()){
+                stmt.eval(actrec);
+                
+            }
+            if(actrec.get("return")==1){
+                conditionStatus=0;       
+            }else{
+                conditionStatus=getExpr().eval(actrec);
+            }
+       }
+    }
+
+    public void IfStmt.eval(ActivationRecord actrec) {
+        if(getExpr().eval(actrec)==1) {
+            for (Stmt stmt : getBlock().getStmtList()) {
+                stmt.eval(actrec);
+            }
+       } else if(hasElse()) {
+           for (Stmt stmt : getElse().getStmtList()) {
+               stmt.eval(actrec);
+           }
+       }
+    }
+
+    public void FunctionCallStmt.eval(ActivationRecord actrec){
+        getExpr().eval(actrec);
+    }
+
+    public void ReturnStmt.eval(ActivationRecord actrec) {
+        int value = getExpr().eval(actrec);
+        //System.out.println("Return value: " + value);
+        actrec.put("return", 1);
+        actrec.put("returnValue", value);
+    }
+
+    //Leta upp funktionen - finns den?
+    //Skapa ny activationRecord
+    //Lägg in parametrarna med uträknade värden
+    public int FunctionCall.eval(ActivationRecord actrec){
+        int value=0;
+        ActivationRecord newActrec = new ActivationRecord();
+        if (getIdUse().getID().equals("print")){
+            for (Expr e : getArgs()) {
+                System.out.println(e.eval(actrec));
+            }
+        } else if (getIdUse().getID().equals("read")) {
+            try {
+                value=actrec.getScanner().nextInt();
+                //actrec.getScanner().nextLine();
+            } catch (Exception e) {
+                throw new RuntimeException("Wrong input, must be Integer, Got: " + value);
+            }
+        } else {
+            for (FunctionDecl func : getFunctionDecls()) {
+
+                //System.out.println("Calling Function: " + getIdUse().getID()+ " Found: " + func.getIdDecl().getID());
+                if (getIdUse().getID().equals(func.getIdDecl().getID())) {
+                    for (int i=0; i<=getNumArg()-1; i++) {
+                        newActrec.put(func.getParam(i).getIdDecl().getID(), getArg(i).eval(actrec));
+                    }
+                    return func.eval(newActrec);
+                }
+            }
+        }
+        //System.out.println("returning");
+        return value;
+    }
+
+    inh List<FunctionDecl> FunctionCall.getFunctionDecls();
+    eq Program.getChild().getFunctionDecls() = getFunctionDecls();
+
+    public int Numeral.eval(ActivationRecord actrec) {
+        return Integer.parseInt(getNUMERAL());
+    }
+    
+    public int Unary.eval(ActivationRecord actrec) {
+        int number=getExpr().eval(actrec);
+        return -number;
+    }
+    
+    public int Add.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) + getRight().eval(actrec);
+    }
+
+    public int Sub.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) - getRight().eval(actrec);
+    }
+
+    public int Mul.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) * getRight().eval(actrec);
+    }
+
+    public int Div.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) / getRight().eval(actrec);
+    }
+
+    public int Mod.eval(ActivationRecord actrec) {
+        return getLeft().eval(actrec) % getRight().eval(actrec);
+    }
+
+    public int Equal.eval(ActivationRecord actrec){
+        return getLeft().eval(actrec) == getRight().eval(actrec) ? 1 : 0;
+    }
+
+    public int NotEqual.eval(ActivationRecord actrec){
+        return getLeft().eval(actrec) != getRight().eval(actrec) ? 1 : 0;
+    }
+
+    public int LessThan.eval(ActivationRecord actrec){
+        return getLeft().eval(actrec) < getRight().eval(actrec) ? 1 : 0;
+    }
+
+    public int GreaterThan.eval(ActivationRecord actrec){
+        return getLeft().eval(actrec) > getRight().eval(actrec) ? 1 : 0;
+    }
+
+    public int LessOrEqual.eval(ActivationRecord actrec){
+        return getLeft().eval(actrec) <= getRight().eval(actrec) ? 1 : 0;
+    }
+
+    public int GreaterOrEqual.eval(ActivationRecord actrec){
+        return getLeft().eval(actrec) >= getRight().eval(actrec) ? 1 : 0;
+    }
+
+    //suffix
+    syn String IdDecl.uniqueName() = CurrentIndex()+getID();
+
+    //ärver prefix uppifrån
+    inh String IdDecl.CurrentIndex();
+    inh String Block.CurrentIndex();
+    inh String Stmt.uniqueNumber();
+
+
+    eq Block.getStmt(int i).uniqueNumber() =CurrentIndex() + Integer.toString(i) + "_";
+
+    eq VariableDecl.getIdDecl().CurrentIndex()=uniqueNumber();
+    eq DeclAssignmentStmt.getIdDecl().CurrentIndex()=uniqueNumber();
+    eq IfStmt.getBlock().CurrentIndex()=uniqueNumber();
+    eq WhileStmt.getBlock().CurrentIndex()=uniqueNumber();
+
+    eq Program.getFunctionDecl(int i).functionIndex() = i;
+    inh int FunctionDecl.functionIndex();
+
+    eq FunctionDecl.getBlock().CurrentIndex()= functionIndex() + "_";
+    eq FunctionDecl.getIdDecl().CurrentIndex()="";
+    eq Param.getIdDecl().CurrentIndex()="";
+    eq Program.unknownDecl().CurrentIndex()="";
+
+/*
+    eq Program.getChild().currentIndex() = "";
+    eq Block.getStmt(int i).currentIndex() = currentIndex() + Integer.toString(i) + "_";
+
+    //suffix
+    syn String IdDecl.uniqueName() = currentIndex()+getID();
+    
+    //ärver prefix uppifrån
+    inh String IdDecl.currentIndex();
+    inh String Block.currentIndex();
+
+    inh String Stmt.currentIndex();
+    eq Stmt.getChild().currentIndex() = currentIndex();
+
+    //main -> block -> functioncallStmt -> functioncall -> functiondecl
+    eq FunctionDecl.getBlock().currentIndex() {
+        IdDecl d = getIdDecl();
+        if (d.getID().equals("main")) {
+            return "m";
+        } else {
+            return d.currentIndex();
+        }
+    }
+*/
+
+}

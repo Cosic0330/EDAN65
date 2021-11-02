@@ -1,0 +1,44 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="x"
+      List
+      Block
+        List
+          AssignmentStmt
+            IdUse ID="a"
+            Sub
+              Add
+                Numeral NUMERAL="1"
+                Numeral NUMERAL="2"
+              Numeral NUMERAL="3"
+          AssignmentStmt
+            IdUse ID="b"
+            Add
+              Sub
+                Numeral NUMERAL="4"
+                Numeral NUMERAL="5"
+              Numeral NUMERAL="6"
+          AssignmentStmt
+            IdUse ID="c"
+            Div
+              Mul
+                Numeral NUMERAL="7"
+                Numeral NUMERAL="8"
+              Numeral NUMERAL="9"
+          AssignmentStmt
+            IdUse ID="d"
+            Mul
+              Div
+                Numeral NUMERAL="1"
+                Numeral NUMERAL="2"
+              Numeral NUMERAL="3"
+          AssignmentStmt
+            IdUse ID="e"
+            Add
+              Numeral NUMERAL="1"
+              Mod
+                Mod
+                  Numeral NUMERAL="2"
+                  Numeral NUMERAL="8"
+                Numeral NUMERAL="9"

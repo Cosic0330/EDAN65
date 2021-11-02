@@ -1,0 +1,11 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="f"
+      List
+      Block
+        List
+          ReturnStmt
+            Unary
+              Unary
+                Numeral NUMERAL="3"
