@@ -1,0 +1,37 @@
+Program
+  List
+    FunctionDecl
+      IdDecl ID="x"
+      List
+      Block
+        List
+          IfStmt
+            Equal
+              IdUse ID="b"
+              Numeral NUMERAL="1"
+            Block
+              List
+                VariableDecl
+                  IdDecl ID="i"
+                FunctionCallStmt
+                  FunctionCall
+                    IdUse ID="g"
+                    List
+                      Numeral NUMERAL="1"
+                      IdUse ID="x"
+            Opt
+          IfStmt
+            Equal
+              IdUse ID="a"
+              Numeral NUMERAL="2"
+            Block
+              List
+                ReturnStmt
+                  Numeral NUMERAL="5"
+            Opt
+              Block
+                List
+                  ReturnStmt
+                    Add
+                      Numeral NUMERAL="5"
+                      Numeral NUMERAL="6"

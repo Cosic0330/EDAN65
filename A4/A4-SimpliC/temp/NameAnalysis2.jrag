@@ -1,0 +1,58 @@
+aspect NameAnalysis {
+	inh IdDecl IdUse.lookup(String name);		//Måste ärva lookup om den ska användas i klassen.
+	syn IdDecl IdUse.decl() = lookup(getID());	   //Skickar in sitt ID i programmet för att hitta noden.
+    
+    //Eq till inh i alla childrens lookup().
+	eq Program.getChild().lookup(String name) = unknownDecl();
+
+	inh IdDecl IdDecl.lookup(String name);
+	syn boolean IdDecl.isMultiDeclared() = lookup(getID()) != this;
+
+    eq FunctionDecl.getIdDecl().lookup(String name){
+        IdDecl decl = functionlookup(name);
+        return !decl.isUnknown() ? decl : lookup(name);
+    }
+
+    syn IdDecl FunctionDecl.functionlookup(String name){
+        for(int i=0; i<=getNumFunctionDecl(); i++) {
+            if(getFunctionDecl(i).getIdDecl().getID().equals(name)) {
+                return getFunctionDecl(i).getIdDecl();
+            }
+        }
+        return unknownDecl();
+    }
+    
+    inh int FunctionDecl.getNumFunctionDecl();
+	eq Program.getChild().getNumFunctionDecl() = getNumFunctionDecl();
+
+	inh FunctionDecl FunctionDecl.getFunctionDecl(int i);
+	eq Program.getChild().getFunctionDecl(int i) = getFunctionDecl(i);
+
+    inh IdDecl FunctionDecl.lookup(String name);
+
+    eq FunctionDecl.getParam(int index).lookup(String name){
+        IdDecl decl = paramLookup(name, index);
+        return !decl.isUnknown() ? decl : lookup(name);
+    }
+
+    syn IdDecl FunctionDecl.paramLookup(String name, int until) {
+        for (int i = 0; i<=until; i++) {
+            if (getParam(i).getIdDecl().getID().equals(name)) {
+                return getParam(i).getIdDecl();
+              }
+          }
+          return unknownDecl();
+    }
+
+    
+}
+
+aspect CircularDefinitions {
+	/* Identify circular definitions in let expressions */
+	syn boolean IdUse.isCircular() = inExprOf(decl());
+	inh boolean IdUse.inExprOf(IdDecl decl);
+	// inh boolean Binding.inExprOf(IdDecl decl);
+	//eq Binding.getExpr().inExprOf(IdDecl decl)
+	//	= getIdDecl() == decl || inExprOf(decl);
+	eq Program.getChild().inExprOf(IdDecl decl) = false;
+}

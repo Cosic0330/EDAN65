@@ -1,0 +1,9 @@
+int x(){
+    return a;
+}
+int y(){
+    return b==2;
+}
+int z(){
+    return gcd1(c, d);
+}
